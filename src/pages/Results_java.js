@@ -4,10 +4,10 @@ import { createAPIEndpoint, ENDPOINT } from '../api';
 import { getFormatedTime } from '../helper';
 import { Card, CardContent, Typography, Button, Alert } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import Confetti from 'react-confetti';  // Import Confetti
-import Answer_c from './Answer_c';
+import Confetti from 'react-confetti';
+import Answer_java from './Answer_java';
 
-export default function Quiz_cResults() {
+export default function Results_java() {
   const { context, setContext } = useStateContext();
   const [score, setScore] = useState(0);
   const [qnAnswers, setQnAnswers] = useState([]);
@@ -16,7 +16,7 @@ export default function Quiz_cResults() {
 
   useEffect(() => {
     const ids = context.selectedOptions.map(x => x.qnId);
-    createAPIEndpoint(ENDPOINT.GetAnswers_c)
+    createAPIEndpoint(ENDPOINT.GetAnswers_java)
       .post(ids)
       .then(res => {
         const qna = context.selectedOptions.map(x => ({
@@ -29,15 +29,15 @@ export default function Quiz_cResults() {
       .catch(err => console.log(err));
   }, []);
 
-  const calculateScore = qna => {
+  const calculateScore = (qna) => {
     let tempScore = qna.reduce((acc, curr) => (curr.answer === curr.selected ? acc + 1 : acc), 0);
     setScore(tempScore);
   };
 
   const restart = () => {
-    setContext({ selectedOptions: [], timeTaken: 0, subjectId: 0 });  // Reset subjectId
+    setContext({ selectedOptions: [], timeTaken: 0, subjectId: 0 });
     navigate('/quiz');
-  }
+  };
 
   const submitScore = () => {
     const payload = {
@@ -46,7 +46,7 @@ export default function Quiz_cResults() {
       timeTaken: context.timeTaken,
       subjectId: context.SubjectId
     };
-  
+
     createAPIEndpoint("ParticipantResult_c")
       .post(payload)
       .then(res => {
@@ -55,12 +55,10 @@ export default function Quiz_cResults() {
       })
       .catch(err => console.log("Error submitting score:", err.response?.data || err));
   };
-  
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 20 }}>
-      
-      {/* Show Confetti if Score is 6/6 */}
-      {score === 6 && <Confetti width={window.innerWidth} height={window.innerHeight} />}
+      {score === qnAnswers.length && <Confetti width={window.innerWidth} height={window.innerHeight} />}
 
       <Card sx={{ width: 400, textAlign: 'center', mb: 3, boxShadow: 3 }}>
         <CardContent>
@@ -72,13 +70,10 @@ export default function Quiz_cResults() {
             Time Taken: {getFormatedTime(context.timeTaken)}
           </Typography>
 
-          <Button variant="contained"
-              sx={{ mx: 1 }}
-              size="small"
-              onClick={submitScore}>
-              Submit
+          <Button variant="contained" sx={{ mx: 1 }} size="small" onClick={submitScore}>
+            Submit
           </Button>
-         
+
           <Alert
             severity="success"
             variant="string"
@@ -86,13 +81,14 @@ export default function Quiz_cResults() {
               width: '60%',
               m: 'auto',
               visibility: showAlert ? 'visible' : 'hidden'
-            }}>
+            }}
+          >
             Score Updated.
           </Alert>
         </CardContent>
       </Card>
-      
-      <Answer_c qnAnswers={qnAnswers} />
+
+      <Answer_java qnAnswers={qnAnswers} />
     </div>
   );
 }

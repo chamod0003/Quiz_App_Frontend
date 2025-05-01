@@ -22,8 +22,17 @@ export default function Layout() {
                         sx={{ flexGrow: 1 }}>
                         Quiz App
                     </Typography>
-                    <Button onClick={logout} sx={{ color: "white" }}>Logout</Button>
-                    </Toolbar>
+
+                    {/* Marks Button */}
+                    <Button onClick={() => navigate("/my-results")} sx={{ color: "white", mr: 2 }}>
+                        Marks
+                    </Button>
+
+                    {/* Logout Button */}
+                    <Button onClick={logout} sx={{ color: "white" }}>
+                        Logout
+                    </Button>
+                </Toolbar>
             </AppBar>
             <Container>
                 <Outlet />

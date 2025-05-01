@@ -94,8 +94,9 @@ const login = (e) => {
 
           // Store the participant details in both endpoints
           Promise.all([
-            createAPIEndpoint(ENDPOINT.Participants).post(participantData),
-            createAPIEndpoint(ENDPOINT.Participant_c).post(participantData)
+           // createAPIEndpoint(ENDPOINT.Participants).post(participantData),
+            createAPIEndpoint(ENDPOINT.Participant_c).
+            post(participantData)
           ])
             .then(([res1, res2]) => {
               // Ensure correct participantId from API response

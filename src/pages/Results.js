@@ -39,26 +39,24 @@ export default function Results() {
     navigate('/quiz');
   }
 
-  const submitScore = () => {
-    // Ensure SubjectId is correctly passed from context
-    const payload = {
-      participantId: context.participantId,
-      Score: score,
-      TimeTaken: context.timeTaken,
-      SubjectId: context.SubjectId  // Corrected typo and ensured it's passed
-    };
-
-    console.log("Payload:", payload);  // Debugging: Log the payload
-
-    createAPIEndpoint(ENDPOINT.Participants)
-      .put(context.participantId, payload)
-      .then(res => {
-        setShowAlert(true);
-        setTimeout(() => setShowAlert(false), 3000);
-      })
-      .catch(err => console.log("Error submitting score:", err.response?.data || err));
-  };
-
+ 
+   const submitScore = () => {
+     const payload = {
+       participantId: context.participantId,
+       score: score,
+       timeTaken: context.timeTaken,
+       subjectId: context.SubjectId
+     };
+   
+     createAPIEndpoint("ParticipantResult_c")
+       .post(payload)
+       .then(res => {
+         setShowAlert(true);
+         setTimeout(() => setShowAlert(false), 3000);
+       })
+       .catch(err => console.log("Error submitting score:", err.response?.data || err));
+   };
+   
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 20 }}>
       

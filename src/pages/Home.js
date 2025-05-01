@@ -39,7 +39,7 @@ export default function Subjects() {
     } else if (subject.subjectId === 3) {
       navigate("/quiz_c"); // Navigate to Quiz_c component for SubjectId 3
     } else {
-      navigate("/quiz"); // Default navigation
+    navigate("/quiz_java"); // Default navigation
     }
   };
 

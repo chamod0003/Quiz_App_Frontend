@@ -10,12 +10,16 @@ export const ENDPOINT ={
     Participants: 'Participants',
     Questions : 'Questions',
     GetAnswers : 'Questions/GetAnswers',
-
+    ParticipantResult_c: 'ParticipantResult_c',
     Subjects : 'Subjects',
 
     Participant_c : 'Participant_c',
     Quiz_c : 'Quiz_c',
     GetAnswers_c: 'Quiz_c/GetAnswers_c',
+
+
+    Quiz_java : 'Quiz_java',
+    GetAnswers_java : 'Quiz_java/GetAnswers_java',
 
 }
 /*

@@ -8,6 +8,10 @@ import Result from "./pages/Results";
 import Home from "./pages/Home";
 import Quiz_c from "./pages/Quiz_c";
 import Quiz_cResults from "./pages/Quiz_cResults";
+import MyResults from "./pages/MyResults";
+import Quiz_java from "./pages/Quiz_java";
+import Results_java from "./pages/Results_java";
+
 
 function App() {
   return (
@@ -24,6 +28,12 @@ function App() {
           <Route path="quiz_cresults" element={<Quiz_cResults />} />
           <Route path="quiz" element={<Quiz />} />
           <Route path="result" element={<Result/>} />
+          <Route path="my-results"element={<MyResults/>}/>
+          <Route path="quiz_java" element={<Quiz_java/>}/>
+          <Route path="quiz_javaresults" element={<Results_java />} />
+
+
+          
         </Route>
       </Routes>
     </Router>
